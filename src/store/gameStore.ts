@@ -7,15 +7,14 @@ import {
 } from '../utils/gameLogic'
 
 const GRID_SIZE = 10
-const INITIAL_SNAKE: Vec3[] = [[0, 0, 0], [-1, 0, 0], [-2, 0, 0]]
-const INITIAL_DIRECTION: Vec3 = [1, 0, 0]
 
 function makeInitialState(): GameState {
+  const snake: Vec3[] = [[0, 0, 0], [-1, 0, 0], [-2, 0, 0]]
   return {
-    snake: INITIAL_SNAKE,
-    direction: INITIAL_DIRECTION,
-    nextDirection: INITIAL_DIRECTION,
-    food: randomFood(INITIAL_SNAKE, GRID_SIZE),
+    snake,
+    direction: [1, 0, 0],
+    nextDirection: [1, 0, 0],
+    food: randomFood(snake, GRID_SIZE),
     score: 0,
     status: 'idle',
     gridSize: GRID_SIZE,
@@ -43,7 +42,7 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
 
     const newHead = addVec3(snake[0], nextDirection)
 
-    if (isOutOfBounds(newHead, gridSize) || collidesWithSelf(newHead, snake)) {
+    if (isOutOfBounds(newHead, gridSize) || collidesWithSelf(newHead, snake.slice(0, -1))) {
       set({ status: 'dead' })
       return
     }
