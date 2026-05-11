@@ -15,7 +15,10 @@ export function GameScene() {
 
   useFrame((_, delta) => {
     const { status, tickInterval, tick } = useGameStore.getState()
-    if (status !== 'playing') return
+    if (status !== 'playing') {
+      accRef.current = 0
+      return
+    }
 
     accRef.current += delta * 1000
     if (accRef.current >= tickInterval) {

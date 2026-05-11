@@ -30,8 +30,8 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
   reset: () => set(makeInitialState()),
 
   setNextDirection: (dir: Vec3) => {
-    const { direction } = get()
-    if (!isOpposite(dir, direction)) {
+    const { direction, nextDirection } = get()
+    if (!isOpposite(dir, direction) && !isOpposite(dir, nextDirection)) {
       set({ nextDirection: dir })
     }
   },
