@@ -6,7 +6,7 @@ import { useGameStore } from '../store/gameStore'
 
 export function FollowCamera() {
   const { camera } = useThree()
-  const smoothPos = useRef(new THREE.Vector3(0, 4, 16))
+  const smoothPos = useRef(new THREE.Vector3(0, 6, 12))
   const headVec = useRef(new THREE.Vector3())
   const dirVec = useRef(new THREE.Vector3())
   const targetVec = useRef(new THREE.Vector3())
@@ -18,13 +18,12 @@ export function FollowCamera() {
     headVec.current.set(...snake[0])
     dirVec.current.set(...direction).normalize()
 
-    // 目标位置：蛇头后方8格 + 向上4格
     targetVec.current
       .copy(headVec.current)
-      .addScaledVector(dirVec.current, -8)
-    targetVec.current.y += 4
+      .addScaledVector(dirVec.current, -12)
+    targetVec.current.y += 6
 
-    smoothPos.current.lerp(targetVec.current, 0.08)
+    smoothPos.current.lerp(targetVec.current, 0.05)
     camera.position.copy(smoothPos.current)
     camera.lookAt(headVec.current)
   })
