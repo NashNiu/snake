@@ -36,5 +36,5 @@ export function randomFood(snake: Vec3[], gridSize: number): Vec3 {
 }
 
 export function calcTickInterval(score: number): number {
-  return Math.max(80, 200 - score * 5)
+  return Math.max(80, 200 - score * 3)
 }

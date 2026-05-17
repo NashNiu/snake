@@ -9,7 +9,6 @@ export function Snake() {
   const direction = useGameStore(s => s.direction)
 
   const headDir = new THREE.Vector3(...direction).normalize()
-  // Handle the case where direction is exactly opposite DEFAULT_DIR
   const headQuat = new THREE.Quaternion()
   if (headDir.dot(DEFAULT_DIR) < -0.9999) {
     headQuat.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI)
@@ -20,9 +19,10 @@ export function Snake() {
   return (
     <group>
       {snake.map((seg, i) => {
-        const t = i / Math.max(snake.length - 1, 1)
-        const emissiveIntensity = 1.5 - t * 1.2
         const isHead = i === 0
+        const t = i / Math.max(snake.length - 1, 1)
+        const color = isHead ? '#ffffff' : '#39ff14'
+        const emissiveIntensity = isHead ? 2.0 : Math.max(0.05, 1.2 * (1 - t))
 
         return (
           <group
@@ -33,8 +33,8 @@ export function Snake() {
             <mesh>
               <boxGeometry args={[0.88, 0.88, 0.88]} />
               <meshStandardMaterial
-                color="#39ff14"
-                emissive="#39ff14"
+                color={color}
+                emissive={color}
                 emissiveIntensity={emissiveIntensity}
               />
             </mesh>
@@ -42,11 +42,11 @@ export function Snake() {
               <>
                 <mesh position={[-0.22, 0.18, -0.45]}>
                   <sphereGeometry args={[0.1, 8, 8]} />
-                  <meshStandardMaterial color="white" emissive="white" emissiveIntensity={1} />
+                  <meshStandardMaterial color="#00fff7" emissive="#00fff7" emissiveIntensity={2} />
                 </mesh>
                 <mesh position={[0.22, 0.18, -0.45]}>
                   <sphereGeometry args={[0.1, 8, 8]} />
-                  <meshStandardMaterial color="white" emissive="white" emissiveIntensity={1} />
+                  <meshStandardMaterial color="#00fff7" emissive="#00fff7" emissiveIntensity={2} />
                 </mesh>
               </>
             )}

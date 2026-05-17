@@ -6,7 +6,7 @@ import {
   isOutOfBounds, collidesWithSelf, randomFood, calcTickInterval,
 } from '../utils/gameLogic'
 
-const GRID_SIZE = 10
+const GRID_SIZE = 20
 
 function makeInitialState(): GameState {
   const snake: Vec3[] = [[0, 0, 0], [-1, 0, 0], [-2, 0, 0]]
