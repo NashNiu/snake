@@ -21,38 +21,39 @@ export function GameOverlay() {
     <div style={{
       ...overlayBase,
       background: status === 'dead'
-        ? 'rgba(5, 5, 16, 0.82)'
-        : 'rgba(5, 5, 16, 0.65)',
+        ? 'rgba(5, 5, 16, 0.85)'
+        : 'rgba(5, 5, 16, 0.70)',
     }}>
       {status === 'idle' && (
         <>
           <h1 style={{
-            color: '#39ff14', fontSize: 56, margin: 0,
-            textShadow: '0 0 30px #39ff14, 0 0 60px #39ff14',
-            letterSpacing: 4,
+            color: '#39ff14', fontSize: 64, margin: 0,
+            textShadow: '0 0 30px #39ff14, 0 0 70px #39ff14',
+            letterSpacing: 8,
           }}>
             3D SNAKE
           </h1>
-          <p style={{ color: '#00fff7', marginTop: 24, fontSize: 16 }}>
-            按方向键开始游戏
+          <p style={{ color: '#00fff7', marginTop: 28, fontSize: 16, letterSpacing: 2 }}>
+            按方向键 / WASD 开始
           </p>
-          <p style={{ color: '#444', marginTop: 8, fontSize: 12 }}>
-            Space 上升 &nbsp;·&nbsp; Shift 下降
+          <p style={{ color: '#2a2a4a', marginTop: 10, fontSize: 12 }}>
+            Space 上升 &nbsp;·&nbsp; Shift 下降 &nbsp;·&nbsp; R 重新开始
           </p>
         </>
       )}
       {status === 'dead' && (
         <>
           <h1 style={{
-            color: '#ff00ff', fontSize: 48, margin: 0,
-            textShadow: '0 0 30px #ff00ff',
+            color: '#ff00ff', fontSize: 52, margin: 0,
+            textShadow: '0 0 30px #ff00ff, 0 0 60px #ff00ff',
+            letterSpacing: 4,
           }}>
-            游戏结束
+            GAME OVER
           </h1>
-          <p style={{ color: '#ffffff', fontSize: 28, margin: '20px 0 8px' }}>
+          <p style={{ color: '#ffffff', fontSize: 32, margin: '24px 0 6px', fontWeight: 'bold' }}>
             得分: {score}
           </p>
-          <p style={{ color: '#555', fontSize: 14 }}>
+          <p style={{ color: '#444', fontSize: 14, letterSpacing: 1 }}>
             按 R 重新开始
           </p>
         </>
