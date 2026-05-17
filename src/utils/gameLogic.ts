@@ -15,7 +15,6 @@ export function isOpposite(a: Vec3, b: Vec3): boolean {
 
 export function isOutOfBounds(pos: Vec3, gridSize: number): boolean {
   return pos[0] > gridSize || pos[0] < -gridSize
-    || pos[1] > gridSize || pos[1] < -gridSize
     || pos[2] > gridSize || pos[2] < -gridSize
 }
 
@@ -28,7 +27,7 @@ export function randomFood(snake: Vec3[], gridSize: number): Vec3 {
   do {
     pos = [
       Math.floor(Math.random() * (gridSize * 2 + 1)) - gridSize,
-      Math.floor(Math.random() * (gridSize * 2 + 1)) - gridSize,
+      0,
       Math.floor(Math.random() * (gridSize * 2 + 1)) - gridSize,
     ]
   } while (snake.some(seg => vec3Equal(seg, pos)))

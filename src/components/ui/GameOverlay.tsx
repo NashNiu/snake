@@ -37,7 +37,7 @@ export function GameOverlay() {
             按方向键 / WASD 开始
           </p>
           <p style={{ color: '#2a2a4a', marginTop: 10, fontSize: 12 }}>
-            Space 上升 &nbsp;·&nbsp; Shift 下降 &nbsp;·&nbsp; R 重新开始
+            R 重新开始
           </p>
         </>
       )}

@@ -6,7 +6,7 @@ import { GameScene } from './GameScene'
 export function Game() {
   return (
     <Canvas
-      camera={{ position: [0, 4, 16], fov: 75, near: 0.1, far: 500 }}
+      camera={{ position: [0, 4, 16], fov: 60, near: 0.1, far: 500 }}
       style={{ width: '100vw', height: '100vh' }}
     >
       <GameScene />

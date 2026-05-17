@@ -39,18 +39,13 @@ describe('isOutOfBounds', () => {
     expect(isOutOfBounds([11, 0, 0], 10)).toBe(true)
     expect(isOutOfBounds([-11, 0, 0], 10)).toBe(true)
   })
-  it('returns true when Y exceeds gridSize', () => {
-    expect(isOutOfBounds([0, 11, 0], 10)).toBe(true)
-    expect(isOutOfBounds([0, -11, 0], 10)).toBe(true)
-  })
   it('returns true when Z exceeds gridSize', () => {
     expect(isOutOfBounds([0, 0, 11], 10)).toBe(true)
     expect(isOutOfBounds([0, 0, -11], 10)).toBe(true)
   })
   it('returns false when on boundary or inside', () => {
     expect(isOutOfBounds([10, 0, 0], 10)).toBe(false)
-    expect(isOutOfBounds([-10, -10, -10], 10)).toBe(false)
-    expect(isOutOfBounds([0, 10, 0], 10)).toBe(false)
+    expect(isOutOfBounds([-10, 0, -10], 10)).toBe(false)
   })
 })
 
@@ -74,8 +69,7 @@ describe('randomFood', () => {
       const pos = randomFood(snake, 10)
       expect(pos[0]).toBeGreaterThanOrEqual(-10)
       expect(pos[0]).toBeLessThanOrEqual(10)
-      expect(pos[1]).toBeGreaterThanOrEqual(-10)
-      expect(pos[1]).toBeLessThanOrEqual(10)
+      expect(pos[1]).toBe(0)
       expect(pos[2]).toBeGreaterThanOrEqual(-10)
       expect(pos[2]).toBeLessThanOrEqual(10)
     }
