@@ -70,12 +70,12 @@ describe('tick', () => {
   it('sets status to dead on self collision', () => {
     useGameStore.setState({
       status: 'playing',
-      snake: [[1, 0, 0], [0, 0, 0], [2, 0, 0]],
+      snake: [[0, 0, 0], [-1, 0, 0], [-2, 0, 0]],
       direction: [1, 0, 0],
-      nextDirection: [1, 0, 0],
+      nextDirection: [-1, 0, 0],
       gridSize: 10,
     })
-    // next head = [2,0,0] which matches snake[2]
+    // next head = [0,0,0] + [-1,0,0] = [-1,0,0] which matches snake[1]
     useGameStore.getState().tick()
     expect(useGameStore.getState().status).toBe('dead')
   })
