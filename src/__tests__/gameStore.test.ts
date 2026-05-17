@@ -118,11 +118,11 @@ describe('tick', () => {
       nextDirection: [1, 0, 0],
       food: [1, 0, 0],
       score: 9,
-      tickInterval: 155,
+      tickInterval: 173,
       gridSize: 10,
     })
     useGameStore.getState().tick()
-    expect(useGameStore.getState().tickInterval).toBe(150)
+    expect(useGameStore.getState().tickInterval).toBe(170)
   })
 })
 

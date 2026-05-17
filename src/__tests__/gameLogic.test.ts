@@ -2,7 +2,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   addVec3, vec3Equal, isOpposite,
-  isOutOfBounds, collidesWithSelf, calcTickInterval,
+  isOutOfBounds, collidesWithSelf, randomFood, calcTickInterval,
 } from '../utils/gameLogic'
 import type { Vec3 } from '../types/game'
 
@@ -35,14 +35,22 @@ describe('isOpposite', () => {
 })
 
 describe('isOutOfBounds', () => {
-  it('returns true when any component exceeds gridSize', () => {
+  it('returns true when X exceeds gridSize', () => {
     expect(isOutOfBounds([11, 0, 0], 10)).toBe(true)
+    expect(isOutOfBounds([-11, 0, 0], 10)).toBe(true)
+  })
+  it('returns true when Y exceeds gridSize', () => {
+    expect(isOutOfBounds([0, 11, 0], 10)).toBe(true)
     expect(isOutOfBounds([0, -11, 0], 10)).toBe(true)
+  })
+  it('returns true when Z exceeds gridSize', () => {
     expect(isOutOfBounds([0, 0, 11], 10)).toBe(true)
+    expect(isOutOfBounds([0, 0, -11], 10)).toBe(true)
   })
   it('returns false when on boundary or inside', () => {
     expect(isOutOfBounds([10, 0, 0], 10)).toBe(false)
     expect(isOutOfBounds([-10, -10, -10], 10)).toBe(false)
+    expect(isOutOfBounds([0, 10, 0], 10)).toBe(false)
   })
 })
 
@@ -59,13 +67,35 @@ describe('collidesWithSelf', () => {
   })
 })
 
+describe('randomFood', () => {
+  it('returns a position within bounds', () => {
+    const snake: Vec3[] = [[0, 0, 0]]
+    for (let i = 0; i < 20; i++) {
+      const pos = randomFood(snake, 10)
+      expect(pos[0]).toBeGreaterThanOrEqual(-10)
+      expect(pos[0]).toBeLessThanOrEqual(10)
+      expect(pos[1]).toBeGreaterThanOrEqual(-10)
+      expect(pos[1]).toBeLessThanOrEqual(10)
+      expect(pos[2]).toBeGreaterThanOrEqual(-10)
+      expect(pos[2]).toBeLessThanOrEqual(10)
+    }
+  })
+  it('never spawns on the snake body', () => {
+    const snake: Vec3[] = Array.from({ length: 50 }, (_, i) => [i, 0, 0] as Vec3)
+    for (let i = 0; i < 10; i++) {
+      const pos = randomFood(snake, 25)
+      expect(snake.some(s => s[0] === pos[0] && s[1] === pos[1] && s[2] === pos[2])).toBe(false)
+    }
+  })
+})
+
 describe('calcTickInterval', () => {
   it('returns 200ms at score 0', () => {
     expect(calcTickInterval(0)).toBe(200)
   })
-  it('decreases by 5ms per point', () => {
-    expect(calcTickInterval(10)).toBe(150)
-    expect(calcTickInterval(20)).toBe(100)
+  it('decreases by 3ms per point', () => {
+    expect(calcTickInterval(10)).toBe(170)
+    expect(calcTickInterval(20)).toBe(140)
   })
   it('floors at 80ms', () => {
     expect(calcTickInterval(100)).toBe(80)
