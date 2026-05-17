@@ -10,21 +10,22 @@ export function Food() {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.position.y = Math.sin(clock.elapsedTime * 2.5) * 0.3
+      meshRef.current.rotation.y = clock.elapsedTime * 1.8
+      meshRef.current.rotation.x = clock.elapsedTime * 0.9
     }
   })
 
   return (
     <group position={[food[0], food[1], food[2]]}>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[0.45, 16, 16]} />
+        <octahedronGeometry args={[0.5, 0]} />
         <meshStandardMaterial
           color="#ff00ff"
           emissive="#ff00ff"
-          emissiveIntensity={2}
+          emissiveIntensity={2.5}
         />
       </mesh>
-      <pointLight color="#ff00ff" intensity={4} distance={5} decay={2} />
+      <pointLight color="#ff00ff" intensity={5} distance={6} decay={2} />
     </group>
   )
 }
