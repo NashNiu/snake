@@ -12,9 +12,6 @@ const KEY_MAP: Record<string, Vec3> = {
   ArrowLeft: [-1, 0, 0],
   KeyD: [1, 0, 0],
   ArrowRight: [1, 0, 0],
-  Space: [0, 1, 0],
-  ShiftLeft: [0, -1, 0],
-  ShiftRight: [0, -1, 0],
 }
 
 export function useControls() {
